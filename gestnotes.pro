@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -15,8 +15,14 @@ CONFIG += c++11
 INCLUDEPATH += include
 
 SOURCES += main.cpp\
-        src/view/connectionwindow.cpp
+        src/view/connectionwindow.cpp \
+    src/model/actor.cpp \
+    src/model/administrator.cpp \
+    src/model/entity.cpp
 
-HEADERS  += include/view/connectionwindow.h
+HEADERS  += include/view/connectionwindow.h \
+    include/model/actor.h \
+    include/model/administrator.h \
+    include/model/entity.h
 
 FORMS    += ui/connectionwindow.ui
