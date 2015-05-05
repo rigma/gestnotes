@@ -2,6 +2,7 @@
 #define ACTOR_H
 
 #include <QObject>
+
 #include <string>
 
 #include "entity.h"
@@ -11,17 +12,19 @@ class Actor : public Entity
     Q_OBJECT
 
 public:
-    Actor(const QString &repositoryName, QObject *parent = nullptr);
-    Actor(const std::string &repositoryName, QObject *parent = nullptr);
-    Actor(const char *repositoryName, QObject *parent = nullptr);
-    Actor(const QString &repositoryName, const QString &serial, const QString &surname, const QString &name, QObject *parent = nullptr);
-    Actor(const std::string &repositoryName, const std::string &serial, const std::string &surname, const std::string &name, QObject *parent = nullptr);
-    Actor(const char *repositoryName, const char *serial, const char *surname, const char *name, QObject *parent = nullptr);
+    Actor(QObject *parent = nullptr);
+    Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, QObject *parent = nullptr);
+    Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, QObject *parent = nullptr);
+    Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, QObject *parent = nullptr);
+    Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, QObject *parent = nullptr);
+    Actor(const char *serial, const char *passwd, const char *surname, const char *name, QObject *parent = nullptr);
+    Actor(const char *serial, const uint &passwd, const char *surname, const char *name, QObject *parent = nullptr);
     Actor(const Actor &actor);
     virtual ~Actor();
 
 public:
     QString serial() const;
+    uint passwd() const;
     QString surname() const;
     QString name() const;
 
@@ -29,6 +32,10 @@ public:
     void setSerial(const QString &serial);
     void setSerial(const std::string &serial);
     void setSerial(const char *serial);
+    void setPassword(const QString &passwd);
+    void setPassword(const std::string &passwd);
+    void setPassword(const char *passwd);
+    void setPassword(const uint &passwd);
     void setSurname(const QString &surname);
     void setSurname(const std::string &surname);
     void setSurname(const char *surname);
@@ -38,6 +45,7 @@ public:
 
 protected:
     QString _serial;
+    uint _passwd;
     QString _surname;
     QString _name;
 };

@@ -5,29 +5,35 @@
 #include <QObject>
 #include <string>
 
+class Repository;
+class AdministratorRepository;
+
 class Entity : public QObject
 {
     Q_OBJECT
 
 public:
-    Entity(const QString &repositoryName, QObject *parent = nullptr);
-    Entity(const std::string &repositoryName, QObject *parent = nullptr);
-    Entity(const char *repositoryName, QObject *parent = nullptr);
+    Entity(QObject *parent = nullptr);
     Entity(const Entity &entity);
     ~Entity();
 
 public:
-    virtual unsigned long id() const;
-    QString repositoryName() const;
+    bool operator==(Entity *e) const;
+
+public:
+    virtual qulonglong id() const;
 
 protected:
-    void setId(unsigned long id);
-
-protected:
-    unsigned long _id;
+    qulonglong _id;
+    bool _modified;
+    bool _created;
+    bool _deleted;
 
 signals:
     void entityModified(unsigned long id, const QString &objectName);
+
+    friend class Repository;
+    friend class AdministratorRepository;
 };
 
 #endif // ENTRY_H

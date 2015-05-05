@@ -1,25 +1,19 @@
 #include <model/entity.h>
 
-Entity::Entity(const QString &objectName, QObject *parent) : QObject(parent),
-    _id(0)
+Entity::Entity(QObject *parent) : QObject(parent),
+    _id(0),
+    _modified(false),
+    _created(false),
+    _deleted(false)
 {
-    setObjectName(objectName);
-}
 
-Entity::Entity(const std::string &repositoryName, QObject *parent) : QObject(parent),
-    _id(0)
-{
-    setObjectName(QString(repositoryName.c_str()));
-}
-
-Entity::Entity(const char *repositoryName, QObject *parent) : QObject(parent),
-    _id(0)
-{
-    setObjectName(QString(repositoryName));
 }
 
 Entity::Entity(const Entity &entity) : QObject(entity.parent()),
-    _id(entity._id)
+    _id(entity._id),
+    _modified(entity._modified),
+    _created(false),
+    _deleted(false)
 {
 
 }
@@ -29,17 +23,12 @@ Entity::~Entity()
 
 }
 
-unsigned long Entity::id() const
+bool Entity::operator==(Entity *e) const
+{
+    return _id == e->_id;
+}
+
+qulonglong Entity::id() const
 {
     return _id;
-}
-
-QString Entity::repositoryName() const
-{
-    return objectName();
-}
-
-void Entity::setId(unsigned long id)
-{
-    _id = id;
 }

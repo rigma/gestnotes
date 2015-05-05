@@ -1,49 +1,35 @@
 #include <model/administrator.h>
 
-Administrator::Administrator(const QString &repositoryName, QObject *parent) :
-    Actor(repositoryName, parent),
+Administrator::Administrator(QObject *parent) :
+    Actor(parent),
     _email()
 {
 
 }
 
-Administrator::Administrator(const std::string &repositoryName, QObject *parent) :
-    Actor(repositoryName, parent),
-    _email()
-{
-
-}
-
-Administrator::Administrator(const char *repositoryName, QObject *parent) :
-    Actor(repositoryName, parent),
-    _email()
-{
-
-}
-
-Administrator::Administrator(const QString &repositoryName, const QString &serial, const QString &surname, const QString &name, const QString &email, QObject *parent) :
-    Actor(repositoryName, serial, surname, name, parent),
+Administrator::Administrator(const QString &serial, const QString &passwd, const QString &surname, const QString &name, const QString &email, QObject *parent) :
+    Actor(serial, passwd, surname, name, parent),
     _email(email)
 {
 
 }
 
-Administrator::Administrator(const std::string &repositoryName, const std::string &serial, const std::string &surname, const std::string &name, const std::string &email, QObject *parent) :
-    Actor(repositoryName, serial, surname, name, parent),
+Administrator::Administrator(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, const std::string &email, QObject *parent) :
+    Actor(serial, passwd, surname, name, parent),
     _email(email.c_str())
 {
 
 }
 
-Administrator::Administrator(const char *repositoryName, const char *serial, const char *surname, const char *name, const char *email, QObject *parent) :
-    Actor(repositoryName, serial, surname, name, parent),
+Administrator::Administrator(const char *serial, const char *passwd, const char *surname, const char *name, const char *email, QObject *parent) :
+    Actor(serial, passwd, surname, name, parent),
     _email(email)
 {
 
 }
 
 Administrator::Administrator(const Administrator &administrator) :
-    Actor(administrator.repositoryName(), administrator._serial, administrator._surname, administrator._name, administrator.parent()),
+    Actor(administrator._serial, administrator._passwd, administrator._surname, administrator._name, administrator.parent()),
     _email(administrator._email)
 {
 
@@ -62,20 +48,14 @@ QString Administrator::email() const
 void Administrator::setEmail(const QString &email)
 {
     _email = email;
-
-    emit entityModified(_id, repositoryName());
 }
 
 void Administrator::setEmail(const std::string &email)
 {
     _email = email.c_str();
-
-    emit entityModified(_id, repositoryName());
 }
 
 void Administrator::setEmail(const char *email)
 {
     _email = email;
-
-    emit entityModified(_id, repositoryName());
 }
