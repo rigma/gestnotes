@@ -1,7 +1,6 @@
 #ifndef ADMINISTRATOR_REPOSITORY_H
 #define ADMINISTRATOR_REPOSITORY_H
 
-#include "administrator.h"
 #include "repository.h"
 
 class AdministratorRepository : public Repository

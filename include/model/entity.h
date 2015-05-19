@@ -7,6 +7,8 @@
 
 class Repository;
 class AdministratorRepository;
+class ProfessorRepostirory;
+class StudentRepository;
 
 class Entity : public QObject
 {
@@ -23,6 +25,14 @@ public:
 public:
     virtual qulonglong id() const;
 
+public:
+    void del();
+
+private slots:
+    void created();
+    void modified();
+    void deleted();
+
 protected:
     qulonglong _id;
     bool _modified;
@@ -30,10 +40,14 @@ protected:
     bool _deleted;
 
 signals:
-    void entityModified(unsigned long id, const QString &objectName);
+    void entityCreated();
+    void entityModified();
+    void entityDeleted();
 
     friend class Repository;
     friend class AdministratorRepository;
+    friend class ProfessorRepository;
+    friend class StudentRepository;
 };
 
 #endif // ENTRY_H

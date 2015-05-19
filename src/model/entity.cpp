@@ -6,7 +6,9 @@ Entity::Entity(QObject *parent) : QObject(parent),
     _created(false),
     _deleted(false)
 {
-
+    connect(this, SIGNAL(entityCreated()), this, SLOT(created()));
+    connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
+    connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
 }
 
 Entity::Entity(const Entity &entity) : QObject(entity.parent()),
@@ -15,7 +17,9 @@ Entity::Entity(const Entity &entity) : QObject(entity.parent()),
     _created(false),
     _deleted(false)
 {
-
+    connect(this, SIGNAL(entityCreated()), this, SLOT(created()));
+    connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
+    connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
 }
 
 Entity::~Entity()
@@ -31,4 +35,24 @@ bool Entity::operator==(Entity *e) const
 qulonglong Entity::id() const
 {
     return _id;
+}
+
+void Entity::del()
+{
+    emit entityDeleted();
+}
+
+void Entity::created()
+{
+    _created = true;
+}
+
+void Entity::modified()
+{
+    _modified = true;
+}
+
+void Entity::deleted()
+{
+    _deleted = true;
 }

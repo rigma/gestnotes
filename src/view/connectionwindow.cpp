@@ -1,3 +1,5 @@
+#include <QMessageBox>
+
 #include <model/administrator_repository.h>
 #include <view/connectionwindow.h>
 
@@ -32,6 +34,8 @@ void ConnectionWindow::connect()
     {
         _ui->lineEdit_id->setText(QString(""));
         _ui->lineEdit_mdp->setText(QString(""));
+
+        QMessageBox::critical(this, QString("Erreur de connexion !"), QString("Impossible de vous connecter avec les identifiants que vous avez renseigné !"));
     }
     // else afficher la nouvelle fenêtre
 }

@@ -11,7 +11,7 @@ Actor::Actor(QObject *parent) :
     _surname(),
     _name()
 {
-
+    emit entityCreated();
 }
 
 Actor::Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, QObject *parent) :
@@ -21,6 +21,8 @@ Actor::Actor(const QString &serial, const QString &passwd, const QString &surnam
     _name(name)
 {
     _passwd = qHash(passwd);
+
+    emit entityCreated();
 }
 
 Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, QObject *parent) :
@@ -30,6 +32,7 @@ Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, 
     _surname(surname),
     _name(name)
 {
+    emit entityCreated();
 }
 
 Actor::Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, QObject *parent) :
@@ -39,6 +42,8 @@ Actor::Actor(const std::string &serial, const std::string &passwd, const std::st
     _name(name.c_str())
 {
     _passwd = qHash(QString(passwd.c_str()));
+
+    emit entityCreated();
 }
 
 Actor::Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, QObject *parent) :
@@ -48,7 +53,7 @@ Actor::Actor(const std::string &serial, const uint &passwd, const std::string &s
     _surname(surname.c_str()),
     _name(name.c_str())
 {
-
+    emit entityCreated();
 }
 
 Actor::Actor(const char *serial, const char *passwd, const char *surname, const char *name, QObject *parent) :
@@ -58,6 +63,8 @@ Actor::Actor(const char *serial, const char *passwd, const char *surname, const 
     _name(name)
 {
     _passwd = qHash(QString(passwd));
+
+    emit entityCreated();
 }
 
 Actor::Actor(const char *serial, const uint &passwd, const char *surname, const char *name, QObject *parent) :
@@ -67,7 +74,7 @@ Actor::Actor(const char *serial, const uint &passwd, const char *surname, const 
     _surname(surname),
     _name(name)
 {
-
+    emit entityCreated();
 }
 
 Actor::Actor(const Actor &actor) :
@@ -108,64 +115,91 @@ QString Actor::name() const
 void Actor::setSerial(const QString &serial)
 {
     _serial = serial;
+
+    emit entityModified();
 }
 
 void Actor::setSerial(const std::string &serial)
 {
     _serial = serial.c_str();
+
+    emit entityModified();
 }
+
 
 void Actor::setSerial(const char *serial)
 {
     _serial = serial;
+
+    emit entityModified();
 }
 
 void Actor::setPassword(const QString &passwd)
 {
     _passwd = qHash(passwd);
+
+    emit entityModified();
 }
 
 void Actor::setPassword(const std::string &passwd)
 {
     _passwd = qHash(QString(passwd.c_str()));
+
+    emit entityModified();
 }
 
 void Actor::setPassword(const char *passwd)
 {
     _passwd = qHash(QString(passwd));
+
+    emit entityModified();
 }
 
 void Actor::setPassword(const uint &passwd)
 {
     _passwd = passwd;
+
+    emit entityModified();
 }
 
 void Actor::setSurname(const QString &surname)
 {
     _surname = surname;
+
+    emit entityModified();
 }
 
 void Actor::setSurname(const std::string &surname)
 {
     _surname = surname.c_str();
+
+    emit entityModified();
 }
 
 void Actor::setSurname(const char *surname)
 {
     _surname = surname;
+
+    emit entityModified();
 }
 
 void Actor::setName(const QString &name)
 {
     _name = name;
+
+    emit entityModified();
 }
 
 void Actor::setName(const std::string &name)
 {
     _name = name.c_str();
+
+    emit entityModified();
 }
 
 void Actor::setName(const char *name)
 {
     _name = name;
+
+    emit entityModified();
 }

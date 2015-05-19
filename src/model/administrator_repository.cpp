@@ -2,6 +2,7 @@
 #include <QSqlQuery>
 
 #include <model/administrator_repository.h>
+#include <model/administrator.h>
 
 AdministratorRepository::AdministratorRepository(AdministratorRepository *repository) : Repository(repository)
 {
@@ -123,7 +124,7 @@ bool AdministratorRepository::persist()
         }
         else if (admin->_created)
         {
-            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, passwd, surname, name, email) VALUES (:serial, :passwd, :surname, :name, :email"));
+            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, passwd, surname, name, email) VALUES (:serial, :passwd, :surname, :name, :email)"));
             query.bindValue(QString(":serial"), QVariant(admin->serial()));
             query.bindValue(QString(":passwd"), QVariant(admin->passwd()));
             query.bindValue(QString(":surname"), QVariant(admin->surname()));
