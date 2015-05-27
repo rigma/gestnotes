@@ -57,9 +57,13 @@ const QDate &Student::registering() const
 void Student::setBirth(const QDate &birth)
 {
     _birth = birth;
+
+    emit entityModified();
 }
 
 void Student::setRegistering(const QDate &registering)
 {
     _registering = registering;
+
+    emit entityModified();
 }

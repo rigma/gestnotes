@@ -115,7 +115,7 @@ bool StudentRepository::persist()
 
         if (student->_modified)
         {
-            query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET serial = :serial, passwd = :passwd, surname = :surname, name = :name, birth = :birth, registering = :registering WHERE id :id"));
+            query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET serial = :serial, passwd = :passwd, surname = :surname, name = :name, birth = date(:birth), registering = date(:registering) WHERE id :id"));
             query.bindValue(QString(":serial"), QVariant(student->id()));
             query.bindValue(QString(":passwd"), QVariant(student->passwd()));
             query.bindValue(QString(":surname"), QVariant(student->surname()));
@@ -127,7 +127,7 @@ bool StudentRepository::persist()
         }
         else if (student->_created)
         {
-            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, passwd, surname, name, birth, registering) VALUES (:serial, :passwd, :surname, :name, :birth, :registering)"));
+            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, passwd, surname, name, birth, registering) VALUES (:serial, :passwd, :surname, :name, date(:birth), date(:registering))"));
             query.bindValue(QString(":serial"), QVariant(student->serial()));
             query.bindValue(QString(":passwd"), QVariant(student->passwd()));
             query.bindValue(QString(":surname"), QVariant(student->surname()));

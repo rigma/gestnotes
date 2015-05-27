@@ -11,7 +11,7 @@ Actor::Actor(QObject *parent) :
     _surname(),
     _name()
 {
-    emit entityCreated();
+
 }
 
 Actor::Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, QObject *parent) :
@@ -21,8 +21,6 @@ Actor::Actor(const QString &serial, const QString &passwd, const QString &surnam
     _name(name)
 {
     _passwd = qHash(passwd);
-
-    emit entityCreated();
 }
 
 Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, QObject *parent) :
@@ -32,7 +30,7 @@ Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, 
     _surname(surname),
     _name(name)
 {
-    emit entityCreated();
+
 }
 
 Actor::Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, QObject *parent) :
@@ -42,8 +40,6 @@ Actor::Actor(const std::string &serial, const std::string &passwd, const std::st
     _name(name.c_str())
 {
     _passwd = qHash(QString(passwd.c_str()));
-
-    emit entityCreated();
 }
 
 Actor::Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, QObject *parent) :
@@ -53,7 +49,7 @@ Actor::Actor(const std::string &serial, const uint &passwd, const std::string &s
     _surname(surname.c_str()),
     _name(name.c_str())
 {
-    emit entityCreated();
+
 }
 
 Actor::Actor(const char *serial, const char *passwd, const char *surname, const char *name, QObject *parent) :
@@ -63,8 +59,6 @@ Actor::Actor(const char *serial, const char *passwd, const char *surname, const 
     _name(name)
 {
     _passwd = qHash(QString(passwd));
-
-    emit entityCreated();
 }
 
 Actor::Actor(const char *serial, const uint &passwd, const char *surname, const char *name, QObject *parent) :
@@ -74,7 +68,7 @@ Actor::Actor(const char *serial, const uint &passwd, const char *surname, const 
     _surname(surname),
     _name(name)
 {
-    emit entityCreated();
+
 }
 
 Actor::Actor(const Actor &actor) :

@@ -9,6 +9,7 @@ class Repository;
 class AdministratorRepository;
 class ProfessorRepostirory;
 class StudentRepository;
+class PhoneRepository;
 
 class Entity : public QObject
 {
@@ -48,6 +49,7 @@ signals:
     friend class AdministratorRepository;
     friend class ProfessorRepository;
     friend class StudentRepository;
+    friend class PhoneRepository;
 };
 
 #endif // ENTRY_H

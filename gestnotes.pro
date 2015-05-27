@@ -24,7 +24,11 @@ SOURCES += main.cpp\
     src/model/student.cpp \
     src/model/student_repository.cpp \
     src/model/professor.cpp \
-    src/model/professor_repository.cpp
+    src/model/professor_repository.cpp \
+    src/model/phone.cpp \
+    src/model/address.cpp \
+    src/model/coordinates.cpp \
+    src/model/contact.cpp
 
 HEADERS  += include/view/connectionwindow.h \
     include/model/actor.h \
@@ -35,6 +39,10 @@ HEADERS  += include/view/connectionwindow.h \
     include/model/student.h \
     include/model/student_repository.h \
     include/model/professor.h \
-    include/model/professor_repository.h
+    include/model/professor_repository.h \
+    include/model/phone.h \
+    include/model/address.h \
+    include/model/coordinates.h \
+    include/model/contact.h
 
 FORMS    += ui/connectionwindow.ui

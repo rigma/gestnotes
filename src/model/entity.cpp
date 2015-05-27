@@ -9,6 +9,8 @@ Entity::Entity(QObject *parent) : QObject(parent),
     connect(this, SIGNAL(entityCreated()), this, SLOT(created()));
     connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
     connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
+
+    emit entityCreated();
 }
 
 Entity::Entity(const Entity &entity) : QObject(entity.parent()),
@@ -20,6 +22,8 @@ Entity::Entity(const Entity &entity) : QObject(entity.parent()),
     connect(this, SIGNAL(entityCreated()), this, SLOT(created()));
     connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
     connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
+
+    emit entityCreated();
 }
 
 Entity::~Entity()

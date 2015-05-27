@@ -48,14 +48,20 @@ QString Administrator::email() const
 void Administrator::setEmail(const QString &email)
 {
     _email = email;
+
+    emit entityModified();
 }
 
 void Administrator::setEmail(const std::string &email)
 {
     _email = email.c_str();
+
+    emit entityModified();
 }
 
 void Administrator::setEmail(const char *email)
 {
     _email = email;
+
+    emit entityModified();
 }
