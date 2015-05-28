@@ -45,4 +45,6 @@ HEADERS  += include/view/connectionwindow.h \
     include/model/coordinates.h \
     include/model/contact.h
 
-FORMS    += ui/connectionwindow.ui
+FORMS    += ui/connectionwindow.ui \
+    ui/interface.ui \
+    ui/mainwindow.ui
