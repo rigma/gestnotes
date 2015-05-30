@@ -1,7 +1,11 @@
 #include <QMessageBox>
 
 #include <model/administrator_repository.h>
+#include <model/professor_repository.h>
+#include <model/student_repository.h>
+
 #include <view/connectionwindow.h>
+#include <view/mainwindow.h>
 
 #include "ui_connectionwindow.h"
 
@@ -21,21 +25,47 @@ ConnectionWindow::~ConnectionWindow()
 
 void ConnectionWindow::connect()
 {
-    AdministratorRepository *repo = (AdministratorRepository*) _repositories->value("administrator");
+    AdministratorRepository *repoAdmin = (AdministratorRepository*) _repositories->value("administrator");
+    ProfessorRepository *repoProf = (ProfessorRepository*) _repositories->value("professor");
+    StudentRepository *repoStudent = (StudentRepository*) _repositories->value("student");
+
     QList<Entity*> result;
     QMap<QString, QVariant> criteria;
 
-    criteria.insert("serial", QVariant(_ui->lineEdit_id->text()));
+    criteria.insert("serial", QVariant(_ui->LineEdit_id->text()));
     criteria.insert("passwd", QVariant(qHash(_ui->lineEdit_mdp->text())));
 
-    result = repo->findBy(criteria);
+    _ui->LineEdit_id->setText(QString(""));
+    _ui->lineEdit_mdp->setText(QString(""));
 
+    result = repoAdmin->findBy(criteria);
+    if (!result.empty())
+    {
+        MainWindow w(_repositories, MainWindow::Administrator, this);
+
+        close();
+        w.show();
+    }
+
+    result = repoProf->findBy(criteria);
+    if (!result.empty())
+    {
+        MainWindow w(_repositories, MainWindow::Professor, this);
+
+        close();
+        w.show();
+    }
+
+    result = repoStudent->findBy(criteria);
     if (result.empty())
     {
-        _ui->lineEdit_id->setText(QString(""));
-        _ui->lineEdit_mdp->setText(QString(""));
+        MainWindow w(_repositories, MainWindow::Student, this);
 
-        QMessageBox::critical(this, QString("Erreur de connexion !"), QString("Impossible de vous connecter avec les identifiants que vous avez renseigné !"));
+        close();
+        w.show();
     }
-    // else afficher la nouvelle fenêtre
+    else
+        QMessageBox::critical(this, QString("Erreur de connexion !"), QString("Impossible de vous connecter avec les identifiants que vous avez renseigné !"));
 }
+
+

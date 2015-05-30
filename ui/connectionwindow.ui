@@ -21,14 +21,14 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
-          <widget class="QLabel" name="label_id">
+          <widget class="QLabel" name="Label_id">
            <property name="text">
             <string>Identifiant</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_id">
+          <widget class="QLineEdit" name="LineEdit_id">
            <property name="placeholderText">
             <string>Entrez votre matricule</string>
            </property>
@@ -39,7 +39,7 @@
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QLabel" name="label_mdp">
+          <widget class="QLabel" name="Label_mdp">
            <property name="text">
             <string>Mot de passe</string>
            </property>

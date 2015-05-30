@@ -1,0 +1,36 @@
+#ifndef MAINWINDOW_H
+#define MAINWINDOW_H
+
+#include <QMainWindow>
+#include <QMap>
+#include <model/repository.h>
+
+#include "ui_mainwindow.h"
+
+namespace Ui {
+class MainWindow;
+}
+
+class MainWindow : public QMainWindow
+{
+
+
+public:
+    enum Mode
+    {
+        Administrator = 0,
+        Professor = 1,
+        Student = 2
+    };
+
+public:
+    explicit MainWindow(QMap<QString, Repository*> *repositories, const Mode &mode = Student, QWidget *parent = nullptr);
+    ~MainWindow();
+
+private:
+    Ui::MainWindow *_ui;
+    QMap<QString, Repository*> *_repositories;
+};
+
+#endif // MAINWINDOW_H
+

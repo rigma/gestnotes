@@ -17,15 +17,13 @@ public:
     explicit ConnectionWindow(QMap<QString, Repository*> *repositories, QWidget *parent = 0);
     ~ConnectionWindow();
 
-
 private slots:
     void connect();
+
 
 private:
     Ui::ConnectionWindow *_ui;
     QMap<QString, Repository*> *_repositories;
-
-
 };
 
 #endif // CONNECTIONWINDOW_H
