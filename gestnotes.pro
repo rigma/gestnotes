@@ -51,4 +51,6 @@ HEADERS  += include/view/connectionwindow.h \
     include/model/phone_repository.h \
     include/model/contact_repository.h
 
-FORMS    += ui/connectionwindow.ui
+FORMS    += ui/connectionwindow.ui \
+    ui/interface.ui \
+    ui/mainwindow.ui
