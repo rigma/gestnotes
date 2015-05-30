@@ -1,6 +1,6 @@
 #include <model/entity.h>
 
-Entity::Entity(QObject *parent) : QObject(parent),
+Entity::Entity(bool created, QObject *parent) : QObject(parent),
     _id(0),
     _modified(false),
     _created(false),
@@ -10,7 +10,8 @@ Entity::Entity(QObject *parent) : QObject(parent),
     connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
     connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
 
-    emit entityCreated();
+    if (created)
+        emit entityCreated();
 }
 
 Entity::Entity(const Entity &entity) : QObject(entity.parent()),
@@ -22,8 +23,6 @@ Entity::Entity(const Entity &entity) : QObject(entity.parent()),
     connect(this, SIGNAL(entityCreated()), this, SLOT(created()));
     connect(this, SIGNAL(entityModified()), this, SLOT(modified()));
     connect(this, SIGNAL(entityDeleted()), this, SLOT(deleted()));
-
-    emit entityCreated();
 }
 
 Entity::~Entity()
@@ -48,12 +47,14 @@ void Entity::del()
 
 void Entity::created()
 {
-    _created = true;
+    if (!_modified && !_deleted)
+        _created = true;
 }
 
 void Entity::modified()
 {
-    _modified = true;
+    if (!_created && !_deleted)
+        _modified = true;
 }
 
 void Entity::deleted()

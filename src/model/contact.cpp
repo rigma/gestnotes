@@ -1,13 +1,13 @@
 #include <include/model/contact.h>
 
-Contact::Contact(QObject *parent) : Entity(parent),
+Contact::Contact(bool created, QObject *parent) : Entity(created, parent),
     _lastName(),
     _firstName()
 {
 
 }
 
-Contact::Contact(const QString &lastName, const QString &firstName, const Coordinates &coordinates, QObject *parent) : Entity(parent),
+Contact::Contact(const QString &lastName, const QString &firstName, const Coordinates &coordinates, bool created, QObject *parent) : Entity(created, parent),
     _lastName(lastName),
     _firstName(firstName),
     _coordinates(coordinates)

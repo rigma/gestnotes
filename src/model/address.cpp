@@ -1,7 +1,6 @@
 #include <include/model/address.h>
 
-Address::Address(QObject *parent) : Entity(parent),
-    _number(),
+Address::Address() : _number(),
     _type(),
     _name(),
     _zipCode(),
@@ -11,8 +10,7 @@ Address::Address(QObject *parent) : Entity(parent),
 
 }
 
-Address::Address(const unsigned short &number, const Type &type, const QString &name, const QString &zipCode, const QString &city, const QString &country, QObject *parent) : Entity(parent),
-    _number(number),
+Address::Address(const unsigned short &number, const Type &type, const QString &name, const QString &zipCode, const QString &city, const QString &country) : _number(number),
     _type(type),
     _name(name),
     _zipCode(zipCode),
@@ -72,43 +70,31 @@ const QString &Address::country() const
 void Address::setNumber(const unsigned short &number)
 {
     _number = number;
-
-    emit entityModified();
 }
 
 void Address::setType(const Address::Type &type)
 {
     _type = type;
-
-    emit entityModified();
 }
 
 void Address::setName(const QString &name)
 {
     _name = name;
-
-    emit entityModified();
 }
 
 void Address::setZipCode(const QString &zipCode)
 {
     _zipCode = zipCode;
-
-    emit entityModified();
 }
 
 void Address::setCity(const QString &city)
 {
     _city = city;
-
-    emit entityModified();
 }
 
 void Address::setCountry(const QString &country)
 {
     _country = country;
-
-    emit entityModified();
 }
 
 QString Address::render() const

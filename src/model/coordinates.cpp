@@ -1,6 +1,6 @@
 #include <include/model/coordinates.h>
 
-Coordinates::Coordinates(QObject *parent) : Entity(parent),
+Coordinates::Coordinates(bool created, QObject *parent) : Entity(created, parent),
     _address(),
     _email(),
     _phones()
@@ -8,7 +8,7 @@ Coordinates::Coordinates(QObject *parent) : Entity(parent),
 
 }
 
-Coordinates::Coordinates(const Address &address, const QString &email, const QList<Phone> &phones, QObject *parent) : Entity(parent),
+Coordinates::Coordinates(const Address &address, const QString &email, const QList<Phone> &phones, bool created, QObject *parent) : Entity(created, parent),
     _address(address),
     _email(email),
     _phones(phones)
@@ -43,6 +43,26 @@ const QString &Coordinates::email() const
 const QList<Phone> &Coordinates::phones() const
 {
     return _phones;
+}
+
+const QStringList &Coordinates::phoneNumbers(const Phone::Type &type, bool all) const
+{
+    QStringList *numbers = new QStringList;
+
+    for (QList<Phone>::const_iterator it = _phones.begin() ; it != _phones.end() ; it++)
+    {
+        if (all || it->type() == type)
+            *numbers << it->phoneNumber();
+    }
+
+    return *numbers;
+}
+
+const QString &Coordinates::rawAddress() const
+{
+    QString *raw = new QString(_address.render());
+
+    return *raw;
 }
 
 void Coordinates::setAddress(const Address &address)

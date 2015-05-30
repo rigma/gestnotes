@@ -4,8 +4,8 @@
 
 #include <model/actor.h>
 
-Actor::Actor(QObject *parent) :
-    Entity(parent),
+Actor::Actor(bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(),
     _passwd(0),
     _surname(),
@@ -14,8 +14,8 @@ Actor::Actor(QObject *parent) :
 
 }
 
-Actor::Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial),
     _surname(surname),
     _name(name)
@@ -23,8 +23,8 @@ Actor::Actor(const QString &serial, const QString &passwd, const QString &surnam
     _passwd = qHash(passwd);
 }
 
-Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial),
     _passwd(passwd),
     _surname(surname),
@@ -33,8 +33,8 @@ Actor::Actor(const QString &serial, const uint &passwd, const QString &surname, 
 
 }
 
-Actor::Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial.c_str()),
     _surname(surname.c_str()),
     _name(name.c_str())
@@ -42,8 +42,8 @@ Actor::Actor(const std::string &serial, const std::string &passwd, const std::st
     _passwd = qHash(QString(passwd.c_str()));
 }
 
-Actor::Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial.c_str()),
     _passwd(passwd),
     _surname(surname.c_str()),
@@ -52,8 +52,8 @@ Actor::Actor(const std::string &serial, const uint &passwd, const std::string &s
 
 }
 
-Actor::Actor(const char *serial, const char *passwd, const char *surname, const char *name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const char *serial, const char *passwd, const char *surname, const char *name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial),
     _surname(surname),
     _name(name)
@@ -61,8 +61,8 @@ Actor::Actor(const char *serial, const char *passwd, const char *surname, const 
     _passwd = qHash(QString(passwd));
 }
 
-Actor::Actor(const char *serial, const uint &passwd, const char *surname, const char *name, QObject *parent) :
-    Entity(parent),
+Actor::Actor(const char *serial, const uint &passwd, const char *surname, const char *name, bool created, QObject *parent) :
+    Entity(created, parent),
     _serial(serial),
     _passwd(passwd),
     _surname(surname),
@@ -72,7 +72,7 @@ Actor::Actor(const char *serial, const uint &passwd, const char *surname, const 
 }
 
 Actor::Actor(const Actor &actor) :
-    Entity(actor.parent()),
+    Entity(false, actor.parent()),
     _serial(actor._serial),
     _passwd(actor._passwd),
     _surname(actor._surname),

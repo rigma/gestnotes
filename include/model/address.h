@@ -1,12 +1,10 @@
 #ifndef ADDRESS_H
 #define ADDRESS_H
 
-#include "entity.h"
+#include <QString>
 
-class Address : public Entity
+class Address
 {
-    Q_OBJECT
-
 public:
     enum Type
     {
@@ -24,8 +22,8 @@ public:
     };
 
 public:
-    Address(QObject *parent = nullptr);
-    Address(const unsigned short &number, const Type &type, const QString &name, const QString &zipCode, const QString &city, const QString &country = QString("FRANCE"), QObject *parent = nullptr);
+    Address();
+    Address(const unsigned short &number, const Type &type, const QString &name, const QString &zipCode, const QString &city, const QString &country = QString("FRANCE"));
     ~Address();
 
 public:

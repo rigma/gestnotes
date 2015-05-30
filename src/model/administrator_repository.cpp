@@ -36,7 +36,7 @@ bool AdministratorRepository::load()
 
     while (query.next())
     {
-        Administrator *admin = new Administrator();
+        Administrator *admin = new Administrator(false);
 
         admin->_id = query.value(idField).toULongLong();
         admin->setSerial(query.value(serialField).toString());

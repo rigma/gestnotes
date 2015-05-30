@@ -16,8 +16,8 @@ public:
     };
 
 public:
-    Phone(QObject *parent = nullptr);
-    Phone(const Phone::Type &type, const QString &number, QObject *parent = nullptr);
+    Phone(bool created = true, QObject *parent = nullptr);
+    Phone(const Phone::Type &type, const QString &number, bool created = true, QObject *parent = nullptr);
     ~Phone();
 
 public:
@@ -26,14 +26,18 @@ public:
 
 public:
     Phone::Type type() const;
+    const QString &countryCode() const;
     const QString &number() const;
+    const QString &phoneNumber() const;
 
 public:
     void setType(const Phone::Type &type);
+    void setCountryCode(const QString &countryCode);
     void setNumber(const QString &number);
 
 private:
     Type _type;
+    QString _countryCode;
     QString _number;
 };
 

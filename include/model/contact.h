@@ -9,8 +9,8 @@ class Contact : public Entity
     Q_OBJECT
 
 public:
-    Contact(QObject *parent = nullptr);
-    Contact(const QString &lastName, const QString &firstName, const Coordinates &coordinates, QObject *parent = nullptr);
+    Contact(bool created = true, QObject *parent = nullptr);
+    Contact(const QString &lastName, const QString &firstName, const Coordinates &coordinates, bool created = true, QObject *parent = nullptr);
     ~Contact();
 
 public:

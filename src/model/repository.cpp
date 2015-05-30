@@ -54,9 +54,13 @@ void Repository::save(Entity *e)
     }
 
     e->_created = true;
+
+    _entities.append(e);
 }
 
 void Repository::del(Entity *e)
 {
     e->_deleted = true;
+
+    _entities.removeOne(e);
 }

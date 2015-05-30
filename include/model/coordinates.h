@@ -2,6 +2,7 @@
 #define COORDINATES_H
 
 #include <QList>
+#include <QStringList>
 
 #include "entity.h"
 #include "address.h"
@@ -12,8 +13,8 @@ class Coordinates : public Entity
     Q_OBJECT
 
 public:
-    Coordinates(QObject *parent = nullptr);
-    Coordinates(const Address &address, const QString &email, const QList<Phone> &phones, QObject *parent = nullptr);
+    Coordinates(bool created = true, QObject *parent = nullptr);
+    Coordinates(const Address &address, const QString &email, const QList<Phone> &phones, bool created = true, QObject *parent = nullptr);
     ~Coordinates();
 
 public:
@@ -23,6 +24,8 @@ public:
     const Address &address() const;
     const QString &email() const;
     const QList<Phone> &phones() const;
+    const QStringList &phoneNumbers(const Phone::Type &type, bool all = false) const;
+    const QString &rawAddress() const;
 
 public:
     void setAddress(const Address &address);
@@ -38,4 +41,3 @@ private:
 };
 
 #endif // COORDINATES_H
-

@@ -35,7 +35,7 @@ bool ProfessorRepository::load()
 
     while (query.next())
     {
-        Professor *prof = new Professor();
+        Professor *prof = new Professor(false);
 
         prof->_id = query.value(idField).toULongLong();
         prof->setSerial(query.value(serialField).toString());

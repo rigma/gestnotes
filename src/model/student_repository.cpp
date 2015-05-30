@@ -32,7 +32,7 @@ bool StudentRepository::load()
 
     while (query.next())
     {
-        Student *student = new Student();
+        Student *student = new Student(false);
 
         student->_id = query.value(idField).toULongLong();
         student->setSerial(query.value(serialField).toString());

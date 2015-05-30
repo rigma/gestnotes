@@ -9,14 +9,16 @@ class Repository;
 class AdministratorRepository;
 class ProfessorRepostirory;
 class StudentRepository;
+class Coordinates;
 class PhoneRepository;
+class ContactRepository;
 
 class Entity : public QObject
 {
     Q_OBJECT
 
 public:
-    Entity(QObject *parent = nullptr);
+    Entity(bool created = true, QObject *parent = nullptr);
     Entity(const Entity &entity);
     ~Entity();
 
@@ -49,7 +51,9 @@ signals:
     friend class AdministratorRepository;
     friend class ProfessorRepository;
     friend class StudentRepository;
+    friend class CoordinatesRepository;
     friend class PhoneRepository;
+    friend class ContactRepository;
 };
 
 #endif // ENTRY_H

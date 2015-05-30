@@ -10,11 +10,11 @@ class Student : public Actor
     Q_OBJECT
 
 public:
-    Student(QObject *parent = nullptr);
-    Student(const QString &serial, const QString &passwd, const QString &surname, const QString &name, const QDate &birth, const QDate &registering, QObject *parent = nullptr);
-    Student(const QString &serial, const uint &passwd, const QString &surname, const QString &name, const QDate &birth, const QDate &registering, QObject *parent = nullptr);
-    Student(const char *serial, const char *passwd, const char *surname, const char *name, const QDate &birth, const QDate &registering, QObject *parent = nullptr);
-    Student(const char *serial, const uint &passwd, const char *surname, const char *name, const QDate &birth, const QDate &registering, QObject *parent = nullptr);
+    Student(bool created = true, QObject *parent = nullptr);
+    Student(const QString &serial, const QString &passwd, const QString &surname, const QString &name, const QDate &birth, const QDate &registering, bool created = true, QObject *parent = nullptr);
+    Student(const QString &serial, const uint &passwd, const QString &surname, const QString &name, const QDate &birth, const QDate &registering, bool created = true, QObject *parent = nullptr);
+    Student(const char *serial, const char *passwd, const char *surname, const char *name, const QDate &birth, const QDate &registering, bool created = true, QObject *parent = nullptr);
+    Student(const char *serial, const uint &passwd, const char *surname, const char *name, const QDate &birth, const QDate &registering, bool created = true, QObject *parent = nullptr);
     Student(const Student &student);
     ~Student();
 

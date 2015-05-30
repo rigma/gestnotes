@@ -12,13 +12,13 @@ class Actor : public Entity
     Q_OBJECT
 
 public:
-    Actor(QObject *parent = nullptr);
-    Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, QObject *parent = nullptr);
-    Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, QObject *parent = nullptr);
-    Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, QObject *parent = nullptr);
-    Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, QObject *parent = nullptr);
-    Actor(const char *serial, const char *passwd, const char *surname, const char *name, QObject *parent = nullptr);
-    Actor(const char *serial, const uint &passwd, const char *surname, const char *name, QObject *parent = nullptr);
+    Actor(bool created = true, QObject *parent = nullptr);
+    Actor(const QString &serial, const QString &passwd, const QString &surname, const QString &name, bool created = true, QObject *parent = nullptr);
+    Actor(const QString &serial, const uint &passwd, const QString &surname, const QString &name, bool created = true, QObject *parent = nullptr);
+    Actor(const std::string &serial, const std::string &passwd, const std::string &surname, const std::string &name, bool created = true, QObject *parent = nullptr);
+    Actor(const std::string &serial, const uint &passwd, const std::string &surname, const std::string &name, bool created = true, QObject *parent = nullptr);
+    Actor(const char *serial, const char *passwd, const char *surname, const char *name, bool created = true, QObject *parent = nullptr);
+    Actor(const char *serial, const uint &passwd, const char *surname, const char *name, bool created = true, QObject *parent = nullptr);
     Actor(const Actor &actor);
     virtual ~Actor();
 
