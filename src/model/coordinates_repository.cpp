@@ -19,11 +19,6 @@ CoordinatesRepository::CoordinatesRepository(const CoordinatesRepository &reposi
 
 }
 
-CoordinatesRepository::~CoordinatesRepository()
-{
-    persist();
-}
-
 bool CoordinatesRepository::load()
 {
     QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);

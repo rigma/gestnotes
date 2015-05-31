@@ -9,7 +9,6 @@ public:
     ContactRepository(ContactRepository *repository = nullptr);
     ContactRepository(const QString &repositoryName);
     ContactRepository(const ContactRepository &repository);
-    ~ContactRepository();
 
 public:
     bool load();

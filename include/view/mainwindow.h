@@ -5,15 +5,13 @@
 #include <QMap>
 #include <model/repository.h>
 
-#include "ui_mainwindow.h"
-
 namespace Ui {
 class MainWindow;
 }
 
 class MainWindow : public QMainWindow
 {
-
+    Q_OBJECT
 
 public:
     enum Mode

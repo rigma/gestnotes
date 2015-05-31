@@ -9,7 +9,6 @@ public:
     StudentRepository(StudentRepository *repository = nullptr);
     StudentRepository(const QString &repositoryName);
     StudentRepository(const StudentRepository &repository);
-    ~StudentRepository();
 
 public:
     bool load();

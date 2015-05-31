@@ -19,17 +19,12 @@ AdministratorRepository::AdministratorRepository(const AdministratorRepository &
 
 }
 
-AdministratorRepository::~AdministratorRepository()
-{
-    persist();
-}
-
 bool AdministratorRepository::load()
 {
     QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int serialField(query.record().indexOf(QString("serial")));
-    int passwdField(query.record().indexOf(QString("passwd")));
+    int passwdField(query.record().indexOf(QString("password")));
     int surnameField(query.record().indexOf(QString("surname")));
     int nameField(query.record().indexOf(QString("name")));
     int emailField(query.record().indexOf(QString("email")));
@@ -124,7 +119,7 @@ bool AdministratorRepository::persist()
         }
         else if (admin->_created)
         {
-            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, passwd, surname, name, email) VALUES (:serial, :passwd, :surname, :name, :email)"));
+            query.prepare(QString("INSERT INTO ") + _repositoryName + QString("(serial, password, surname, name, email) VALUES (:serial, :passwd, :surname, :name, :email)"));
             query.bindValue(QString(":serial"), QVariant(admin->serial()));
             query.bindValue(QString(":passwd"), QVariant(admin->passwd()));
             query.bindValue(QString(":surname"), QVariant(admin->surname()));

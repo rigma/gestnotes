@@ -15,7 +15,7 @@ public:
     Repository(Repository *repository = nullptr);
     Repository(const QString &repositoryName);
     Repository(const Repository &repository);
-    ~Repository();
+    virtual ~Repository();
 
 public:
     virtual bool load() = 0;

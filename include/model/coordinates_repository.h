@@ -9,7 +9,6 @@ public:
     CoordinatesRepository(CoordinatesRepository *repository = nullptr);
     CoordinatesRepository(const QString &repositoryName);
     CoordinatesRepository(const CoordinatesRepository &repository);
-    ~CoordinatesRepository();
 
 public:
     bool load();

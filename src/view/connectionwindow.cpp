@@ -41,28 +41,40 @@ void ConnectionWindow::connect()
     result = repoAdmin->findBy(criteria);
     if (!result.empty())
     {
-        MainWindow w(_repositories, MainWindow::Administrator, this);
+        MainWindow w(_repositories, MainWindow::Administrator);
 
         close();
         w.show();
+
+        while (w.isVisible());
+
+        return;
     }
 
     result = repoProf->findBy(criteria);
     if (!result.empty())
     {
-        MainWindow w(_repositories, MainWindow::Professor, this);
+        MainWindow w(_repositories, MainWindow::Professor);
 
         close();
         w.show();
+
+        while (w.isVisible());
+
+        return;
     }
 
     result = repoStudent->findBy(criteria);
     if (result.empty())
     {
-        MainWindow w(_repositories, MainWindow::Student, this);
+        MainWindow w(_repositories);
 
         close();
         w.show();
+
+        while (w.isVisible());
+
+        return;
     }
     else
         QMessageBox::critical(this, QString("Erreur de connexion !"), QString("Impossible de vous connecter avec les identifiants que vous avez renseigné !"));

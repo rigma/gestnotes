@@ -9,7 +9,6 @@ public:
     PhoneRepository(PhoneRepository *repository = nullptr);
     PhoneRepository(const QString &repositoryName);
     PhoneRepository(const PhoneRepository &repository);
-    ~PhoneRepository();
 
 public:
     bool load();

@@ -9,7 +9,6 @@ public:
     AdministratorRepository(AdministratorRepository *repository = nullptr);
     AdministratorRepository(const QString &repositoryName);
     AdministratorRepository(const AdministratorRepository &repository);
-    ~AdministratorRepository();
 
 public:
     bool load();

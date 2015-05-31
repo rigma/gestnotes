@@ -20,11 +20,6 @@ ContactRepository::ContactRepository(const ContactRepository &repository) : Repo
 
 }
 
-ContactRepository::~ContactRepository()
-{
-    persist();
-}
-
 bool ContactRepository::load()
 {
     QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);

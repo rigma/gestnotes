@@ -19,17 +19,12 @@ ProfessorRepository::ProfessorRepository(const ProfessorRepository &repository) 
 
 }
 
-ProfessorRepository::~ProfessorRepository()
-{
-    persist();
-}
-
 bool ProfessorRepository::load()
 {
     QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int serialField(query.record().indexOf(QString("serial")));
-    int passwdField(query.record().indexOf(QString("passwd")));
+    int passwdField(query.record().indexOf(QString("password")));
     int surnameField(query.record().indexOf(QString("surname")));
     int nameField(query.record().indexOf(QString("name")));
 

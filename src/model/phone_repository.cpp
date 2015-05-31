@@ -19,11 +19,6 @@ PhoneRepository::PhoneRepository(const PhoneRepository &repository) : Repository
 
 }
 
-PhoneRepository::~PhoneRepository()
-{
-    persist();
-}
-
 bool PhoneRepository::load()
 {
     QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);

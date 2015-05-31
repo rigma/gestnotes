@@ -9,7 +9,6 @@ public:
     ProfessorRepository(ProfessorRepository *repository = nullptr);
     ProfessorRepository(const QString &repositoryName);
     ProfessorRepository(const ProfessorRepository &repository);
-    ~ProfessorRepository();
 
 public:
     bool load();
