@@ -25,6 +25,9 @@ public:
     explicit MainWindow(QMap<QString, Repository*> *repositories, const Mode &mode = Student, QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void studentContextMenu(const QPoint &point);
+
 private:
     Ui::MainWindow *_ui;
     QMap<QString, Repository*> *_repositories;

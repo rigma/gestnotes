@@ -54,7 +54,7 @@ void AddStudentDialog::accept()
     student->setName(_ui->LineEdit_Prenom->text());
     student->setPassword(_ui->LineEdit_Nom->text().toLower() + "_" + _ui->LineEdit_Prenom->text().toLower());
     student->setRegistering(QDate::currentDate());
-    student->setBirth(QDate());
+    student->setBirth(_ui->DateEdit_Naissance->date());
     repo->save(student);
     close();
 
