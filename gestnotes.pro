@@ -55,4 +55,5 @@ HEADERS  += include/view/connectionwindow.h \
 
 FORMS    += ui/connectionwindow.ui \
     ui/interface.ui \
-    ui/mainwindow.ui
+    ui/mainwindow.ui \
+    ui/add_student.ui
