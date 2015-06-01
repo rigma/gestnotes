@@ -14,6 +14,7 @@
 #include <model/phone_repository.h>
 
 #include <view/connectionwindow.h>
+#include <view/mainwindow.h>
 
 #define N 6
 
@@ -21,9 +22,11 @@ int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
     QMap<QString, Repository*> repositories;
+    MainWindow *window(nullptr);
     QProgressBar loading;
     QSqlDatabase db;
     QSqlQuery query;
+
     int code(0);
     bool prepare(false);
 
@@ -95,7 +98,7 @@ int main(int argc, char **argv)
     loading.setValue(6);
     loading.close();
 
-    ConnectionWindow connection(&repositories);
+    ConnectionWindow connection(&repositories, &window);
     connection.show();
 
     code = app.exec();
@@ -106,6 +109,9 @@ int main(int argc, char **argv)
 
         delete it.value();
     }
+
+    if (window != nullptr)
+        delete window;
 
     return code;
 }

@@ -9,9 +9,10 @@
 
 #include "ui_connectionwindow.h"
 
-ConnectionWindow::ConnectionWindow(QMap<QString, Repository*> *repositories, QWidget *parent) : QWidget(parent),
+ConnectionWindow::ConnectionWindow(QMap<QString, Repository*> *repositories, MainWindow **mainWindow, QWidget *parent) : QWidget(parent),
     _ui(new Ui::ConnectionWindow),
-    _repositories(repositories)
+    _repositories(repositories),
+    _mainWindow(mainWindow)
 {
     _ui->setupUi(this);
     QObject::connect(_ui->Button_connect, SIGNAL(clicked()), this, SLOT(connect()));
@@ -41,12 +42,10 @@ void ConnectionWindow::connect()
     result = repoAdmin->findBy(criteria);
     if (!result.empty())
     {
-        MainWindow w(_repositories, MainWindow::Administrator);
+        *_mainWindow = new MainWindow(_repositories, MainWindow::Administrator);
 
         close();
-        w.show();
-
-        while (w.isVisible());
+        (*_mainWindow)->show();
 
         return;
     }
@@ -54,12 +53,10 @@ void ConnectionWindow::connect()
     result = repoProf->findBy(criteria);
     if (!result.empty())
     {
-        MainWindow w(_repositories, MainWindow::Professor);
+        *_mainWindow = new MainWindow(_repositories, MainWindow::Professor);
 
         close();
-        w.show();
-
-        while (w.isVisible());
+        (*_mainWindow)->show();
 
         return;
     }
@@ -67,17 +64,13 @@ void ConnectionWindow::connect()
     result = repoStudent->findBy(criteria);
     if (result.empty())
     {
-        MainWindow w(_repositories);
+        *_mainWindow = new MainWindow(_repositories);
 
         close();
-        w.show();
-
-        while (w.isVisible());
+        (*_mainWindow)->show();
 
         return;
     }
     else
         QMessageBox::critical(this, QString("Erreur de connexion !"), QString("Impossible de vous connecter avec les identifiants que vous avez renseigné !"));
 }
-
-

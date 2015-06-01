@@ -3,7 +3,9 @@
 
 #include <QMap>
 #include <QWidget>
+
 #include <model/repository.h>
+#include <view/mainwindow.h>
 
 namespace Ui {
 class ConnectionWindow;
@@ -14,7 +16,7 @@ class ConnectionWindow : public QWidget
     Q_OBJECT
 
 public:
-    explicit ConnectionWindow(QMap<QString, Repository*> *repositories, QWidget *parent = 0);
+    explicit ConnectionWindow(QMap<QString, Repository*> *repositories, MainWindow **mainWindow, QWidget *parent = 0);
     ~ConnectionWindow();
 
 private slots:
@@ -24,6 +26,7 @@ private slots:
 private:
     Ui::ConnectionWindow *_ui;
     QMap<QString, Repository*> *_repositories;
+    MainWindow **_mainWindow;
 };
 
 #endif // CONNECTIONWINDOW_H
