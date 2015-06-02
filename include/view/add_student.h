@@ -25,6 +25,9 @@ private slots:
 private:
     Ui::AddStudentDialog *_ui;
     QMap<QString, Repository*> *_repositories;
+
+signals:
+    void studentCreated();
 };
 
 #endif // ADD_STUDENT_H

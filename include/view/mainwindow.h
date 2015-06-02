@@ -28,6 +28,7 @@ public:
 private slots:
     void studentContextMenu(const QPoint &point);
     void ajouterEleve();
+    void studentCreated();
 
 private:
     Ui::MainWindow *_ui;

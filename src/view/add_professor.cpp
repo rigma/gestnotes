@@ -36,7 +36,7 @@ void AddProfessorDialog::accept()
         delete this;
     }
 
-    criteria["surname"] = QVariant(_ui->LineEdit_Nom->text());
+    criteria["surname"] = QVariant(_ui->lineEdit_Nom->text());
     criteria["name"] = QVariant(_ui->LineEdit_Prenom->text());
 
     QList<Entity*> result = repo->findBy(criteria);
@@ -50,9 +50,9 @@ void AddProfessorDialog::accept()
     }
 
     professor->setSerial(_ui->LineEdit_Matricule->text());
-    professor->setSurname(_ui->LineEdit_Nom->text());
+    professor->setSurname(_ui->lineEdit_Nom->text());
     professor->setName(_ui->LineEdit_Prenom->text());
-    professor->setPassword(_ui->LineEdit_Nom->text().toLower() + "_" + _ui->LineEdit_Prenom->text().toLower());
+    professor->setPassword(_ui->lineEdit_Nom->text().toLower() + "_" + _ui->LineEdit_Prenom->text().toLower());
 
     repo->save(professor);
     close();

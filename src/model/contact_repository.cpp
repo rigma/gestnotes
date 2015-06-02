@@ -5,12 +5,12 @@
 #include <model/contact_repository.h>
 #include <model/contact.h>
 
-ContactRepository::ContactRepository(ContactRepository *repository) : Repository(repository)
+ContactRepository::ContactRepository(ContactRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-ContactRepository::ContactRepository(const QString &repositoryName) : Repository(repositoryName)
+ContactRepository::ContactRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
 {
 
 }
@@ -89,6 +89,7 @@ bool ContactRepository::persist()
         if (contact->_modified)
         {
             query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET lastName = :lastName, firstName = :firstName WHERE id :id"));
+            query.bindValue(QString(":id"), QVariant(contact->id()));
             query.bindValue(QString(":lastName"), QVariant(contact->lastName()));
             query.bindValue(QString(":firstName"), QVariant(contact->firstName()));
 

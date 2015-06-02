@@ -6,8 +6,8 @@
 class PhoneRepository : public Repository
 {
 public:
-    PhoneRepository(PhoneRepository *repository = nullptr);
-    PhoneRepository(const QString &repositoryName);
+    PhoneRepository(PhoneRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
+    PhoneRepository(const QString &repositoryName, QMap<QString, Repository*> *parent = nullptr);
     PhoneRepository(const PhoneRepository &repository);
 
 public:
@@ -18,4 +18,3 @@ public:
 };
 
 #endif // PHONE_REPOSITORY_H
-

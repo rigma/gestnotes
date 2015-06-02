@@ -4,12 +4,12 @@
 #include <model/phone_repository.h>
 #include <model/phone.h>
 
-PhoneRepository::PhoneRepository(PhoneRepository *repository) : Repository(repository)
+PhoneRepository::PhoneRepository(PhoneRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-PhoneRepository::PhoneRepository(const QString &repositoryName) : Repository(repositoryName)
+PhoneRepository::PhoneRepository(const QString &repositoryName, QMap<QString, Repository *> *parent) : Repository(repositoryName, parent)
 {
 
 }
@@ -90,6 +90,7 @@ bool PhoneRepository::persist()
         if (phone->_modified)
         {
             query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET type = :type, countryCode = :countryCode, number = :number WHERE id :id"));
+            query.bindValue(QString(":type"), QVariant(phone->id()));
             query.bindValue(QString(":type"), QVariant(phone->type()));
             query.bindValue(QString(":countryCode"), QVariant(phone->countryCode()));
             query.bindValue(QString(":number"), QVariant(phone->number()));

@@ -4,12 +4,12 @@
 #include <model/professor_repository.h>
 #include <model/professor.h>
 
-ProfessorRepository::ProfessorRepository(ProfessorRepository *repository) : Repository(repository)
+ProfessorRepository::ProfessorRepository(ProfessorRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-ProfessorRepository::ProfessorRepository(const QString &repositoryName) : Repository(repositoryName)
+ProfessorRepository::ProfessorRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
 {
 
 }

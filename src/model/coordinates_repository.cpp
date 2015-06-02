@@ -4,12 +4,12 @@
 #include <model/coordinates_repository.h>
 #include <model/coordinates.h>
 
-CoordinatesRepository::CoordinatesRepository(CoordinatesRepository *repository) : Repository(repository)
+CoordinatesRepository::CoordinatesRepository(CoordinatesRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-CoordinatesRepository::CoordinatesRepository(const QString &repositoryName) : Repository(repositoryName)
+CoordinatesRepository::CoordinatesRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
 {
 
 }
@@ -97,6 +97,7 @@ bool CoordinatesRepository::persist()
         if (coordinates->_modified)
         {
             query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET number = :number, type = :type, name = :name, zipCode = :zipCode, city = :city, country = :country, email = :email WHERE id :id"));
+            query.bindValue(QString(":id"), QVariant(coordinates->id()));
             query.bindValue(QString(":number"), QVariant(coordinates->address().number()));
             query.bindValue(QString(":type"), QVariant(coordinates->address().type()));
             query.bindValue(QString(":name"), QVariant(coordinates->address().name()));

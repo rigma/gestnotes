@@ -12,8 +12,8 @@
 class Repository
 {
 public:
-    Repository(Repository *repository = nullptr);
-    Repository(const QString &repositoryName);
+    Repository(Repository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
+    Repository(const QString &repositoryName, QMap<QString, Repository *> *parent = nullptr);
     Repository(const Repository &repository);
     virtual ~Repository();
 
@@ -24,15 +24,20 @@ public:
     virtual bool persist() = 0;
 
 public:
+    QMap<QString, Repository*> parent();
     const QList<Entity*> &entities() const;
     const QString &repositoryName() const;
 
 public:
+    void setRepositoryName(const QString &repositoryName);
+    void setParent(QMap<QString, Repository*> *parent);
+
+public:
     void save(Entity *e);
     void del(Entity *e);
-    void setRepositoryName(const QString &repositoryName);
 
 protected:
+    QMap<QString, Repository*> *_parent;
     QList<Entity*> _entities;
     QString _repositoryName;
 };

@@ -58,6 +58,8 @@ void AddStudentDialog::accept()
     repo->save(student);
     close();
 
+    emit studentCreated();
+
     delete this;
 }
 

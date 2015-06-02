@@ -6,8 +6,8 @@
 class ContactRepository : public Repository
 {
 public:
-    ContactRepository(ContactRepository *repository = nullptr);
-    ContactRepository(const QString &repositoryName);
+    ContactRepository(ContactRepository *repository = nullptr, QMap<QString, Repository *> *parent = nullptr);
+    ContactRepository(const QString &repositoryName, QMap<QString, Repository*> *parent = nullptr);
     ContactRepository(const ContactRepository &repository);
 
 public:

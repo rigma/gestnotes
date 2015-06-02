@@ -67,32 +67,32 @@ int main(int argc, char **argv)
     loading.setValue(0);
     loading.show();
 
-    repositories.insert("administrator", new AdministratorRepository(QString("administrator")));
+    repositories.insert("administrator", new AdministratorRepository(QString("administrator"), &repositories));
     repositories.value("administrator")->load();
 
     loading.setValue(1);
 
-    repositories.insert("professor", new ProfessorRepository(QString("professor")));
+    repositories.insert("professor", new ProfessorRepository(QString("professor"), &repositories));
     repositories.value("professor")->load();
 
     loading.setValue(2);
 
-    repositories.insert("student", new StudentRepository(QString("student")));
+    repositories.insert("student", new StudentRepository(QString("student"), &repositories));
     repositories.value("student")->load();
 
     loading.setValue(3);
 
-    repositories.insert("contact", new ContactRepository(QString("contact")));
+    repositories.insert("contact", new ContactRepository(QString("contact"), &repositories));
     repositories.value("contact")->load();
 
     loading.setValue(4);
 
-    repositories.insert("coordinates", new CoordinatesRepository(QString("coordinates")));
+    repositories.insert("coordinates", new CoordinatesRepository(QString("coordinates"), &repositories));
     repositories.value("coordinates")->load();
 
     loading.setValue(5);
 
-    repositories.insert("phone", new PhoneRepository(QString("phone")));
+    repositories.insert("phone", new PhoneRepository(QString("phone"), &repositories));
     repositories.value("phone")->load();
 
     loading.setValue(6);

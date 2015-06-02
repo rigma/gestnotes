@@ -4,12 +4,12 @@
 #include <model/administrator_repository.h>
 #include <model/administrator.h>
 
-AdministratorRepository::AdministratorRepository(AdministratorRepository *repository) : Repository(repository)
+AdministratorRepository::AdministratorRepository(AdministratorRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-AdministratorRepository::AdministratorRepository(const QString &repositoryName) : Repository(repositoryName)
+AdministratorRepository::AdministratorRepository(const QString &repositoryName, QMap<QString, Repository *> *parent) : Repository(repositoryName, parent)
 {
 
 }
@@ -109,7 +109,8 @@ bool AdministratorRepository::persist()
         if (admin->_modified)
         {
             query.prepare(QString("UPDATE ") + _repositoryName + QString(" SET serial = :serial, passwd = :passwd, surname = :surname, name = :name, email = :email WHERE id :id"));
-            query.bindValue(QString(":serial"), QVariant(admin->id()));
+            query.bindValue(QString(":id"), QVariant(admin->id()));
+            query.bindValue(QString(":serial"), QVariant(admin->serial()));
             query.bindValue(QString(":passwd"), QVariant(admin->passwd()));
             query.bindValue(QString(":surname"), QVariant(admin->surname()));
             query.bindValue(QString(":name"), QVariant(admin->name()));

@@ -11,24 +11,21 @@ class Group : public Entity
     Q_OBJECT
 
 public:
-    Group(bool created = true, const QObject *parent = nullptr);
-    Group(const QString &name, const float &coefficient, bool created = true, QObject *parent = nullptr);
+    Group(bool created = true, QObject *parent = nullptr);
+    Group(const QString &name, bool created = true, QObject *parent = nullptr);
     ~Group();
 
 public:
     const QString &name() const;
-    float coefficient() const;
     const QList<Student*> &students() const;
 
 public:
-    void setName(const QString &group);
-    void setCoefficient(const float &coefficient);
-    void addStudent(const Student *student);
-    void removeStudent(const Student *student);
+    void setName(const QString &name);
+    void addStudent(Student *student);
+    void removeStudent(Student *student);
 
 private:
     QString _name;
-    float _coefficient;
     QList<Student*> _students;
 };
 

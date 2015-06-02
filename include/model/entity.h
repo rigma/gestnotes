@@ -12,6 +12,7 @@ class StudentRepository;
 class Coordinates;
 class PhoneRepository;
 class ContactRepository;
+class GroupRepository;
 
 class Entity : public QObject
 {
@@ -54,7 +55,7 @@ signals:
     friend class CoordinatesRepository;
     friend class PhoneRepository;
     friend class ContactRepository;
+    friend class GroupRepository;
 };
 
 #endif // ENTRY_H
-

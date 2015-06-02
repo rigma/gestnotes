@@ -4,12 +4,12 @@
 #include <model/student_repository.h>
 #include <model/student.h>
 
-StudentRepository::StudentRepository(StudentRepository *repository) : Repository(repository)
+StudentRepository::StudentRepository(StudentRepository *repository, QMap<QString, Repository*> *parent) : Repository(repository, parent)
 {
 
 }
 
-StudentRepository::StudentRepository(const QString &repositoryName) : Repository(repositoryName)
+StudentRepository::StudentRepository(const QString &repositoryName, QMap<QString, Repository *> *parent) : Repository(repositoryName, parent)
 {
 
 }

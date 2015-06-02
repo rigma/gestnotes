@@ -2,20 +2,23 @@
 
 #include <model/repository.h>
 
-Repository::Repository(Repository *repository) : _entities(),
+Repository::Repository(Repository *repository, QMap<QString, Repository*> *parent) : _parent(parent),
+    _entities(),
     _repositoryName()
 {
     if (repository != nullptr)
         _repositoryName = repository->_repositoryName;
 }
 
-Repository::Repository(const QString &repositoryName) : _entities(),
+Repository::Repository(const QString &repositoryName, QMap<QString, Repository*> *parent) : _parent(parent),
+    _entities(),
     _repositoryName(repositoryName)
 {
 
 }
 
-Repository::Repository(const Repository &repository) : _entities(repository._entities),
+Repository::Repository(const Repository &repository) : _parent(repository._parent),
+    _entities(repository._entities),
     _repositoryName(repository._repositoryName)
 {
 
@@ -52,8 +55,6 @@ void Repository::save(Entity *e)
             return;
         }
     }
-
-    e->_created = true;
 
     _entities.append(e);
 }
