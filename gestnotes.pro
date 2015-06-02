@@ -33,7 +33,8 @@ SOURCES += main.cpp\
     src/model/phone_repository.cpp \
     src/model/contact_repository.cpp \
     src/view/mainwindow.cpp \
-    src/view/add_student.cpp
+    src/view/add_student.cpp \
+    src/model/group.cpp
 
 HEADERS  += include/view/connectionwindow.h \
     include/model/actor.h \
@@ -53,7 +54,8 @@ HEADERS  += include/view/connectionwindow.h \
     include/model/phone_repository.h \
     include/model/contact_repository.h \
     include/view/mainwindow.h \
-    include/view/add_student.h
+    include/view/add_student.h \
+    include/model/group.h
 
 FORMS    += ui/connectionwindow.ui \
     ui/interface.ui \
