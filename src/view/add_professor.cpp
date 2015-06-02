@@ -1,4 +1,3 @@
-
 #include <QMessageBox>
 #include <QMap>
 
@@ -25,7 +24,7 @@ AddProfessorDialog::~AddProfessorDialog()
 
 void AddProfessorDialog::accept()
 {
-    StudentRepository *repo = (ProfessorRepository*) _repositories->value("professor");
+    ProfessorRepository *repo = (ProfessorRepository*) _repositories->value("professor");
     Professor *professor = new Professor;
     QMap<QString, QVariant> criteria;
 
@@ -43,26 +42,25 @@ void AddProfessorDialog::accept()
     QList<Entity*> result = repo->findBy(criteria);
     if (!result.empty())
     {
-        QMessageBox::critical(this, QString("Erreur"), QString("L'étudiant existe déjà dans la base de donnée !"));
+        QMessageBox::critical(this, QString("Erreur"), QString("Le porfesseur existe déjà dans la base de donnée !"));
         close();
 
-        delete student;
+        delete professor;
         delete this;
     }
 
-    student->setSerial(_ui->LineEdit_Matricule->text());
-    student->setSurname(_ui->LineEdit_Nom->text());
-    student->setName(_ui->LineEdit_Prenom->text());
-    student->setPassword(_ui->LineEdit_Nom->text().toLower() + "_" + _ui->LineEdit_Prenom->text().toLower());
-    student->setRegistering(QDate::currentDate());
-    student->setBirth(_ui->DateEdit_Naissance->date());
-    repo->save(student);
+    professor->setSerial(_ui->LineEdit_Matricule->text());
+    professor->setSurname(_ui->LineEdit_Nom->text());
+    professor->setName(_ui->LineEdit_Prenom->text());
+    professor->setPassword(_ui->LineEdit_Nom->text().toLower() + "_" + _ui->LineEdit_Prenom->text().toLower());
+
+    repo->save(professor);
     close();
 
     delete this;
 }
 
-void AddStudentDialog::reject()
+void AddProfessorDialog::reject()
 {
     close();
 
