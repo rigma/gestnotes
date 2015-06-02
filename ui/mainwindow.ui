@@ -29,11 +29,7 @@
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
-         <widget class="QTableWidget" name="Tableau_Eleve">
-          <property name="contextMenuPolicy">
-           <enum>Qt::CustomContextMenu</enum>
-          </property>
-         </widget>
+         <widget class="QListWidget" name="Tableau_Eleve"/>
         </item>
        </layout>
       </widget>

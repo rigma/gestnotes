@@ -1,5 +1,8 @@
-#include <view/mainwindow.h>
+#include <model/student_repository.h>
+#include <model/student.h>
+
 #include <view/add_student.h>
+#include <view/mainwindow.h>
 
 #include "ui_mainwindow.h"
 
@@ -28,6 +31,22 @@ void MainWindow::studentContextMenu(const QPoint &point)
 
 void MainWindow::ajouterEleve()
 {
-    AddStudentDialog *dialog = new AddStudentDialog(_repositories, this);
+    AddStudentDialog *dialog = new AddStudentDialog(_repositories);
+
+    connect(dialog, SIGNAL(destroyed(QObject*)), this, SLOT(studentCreated(QObject*)));
     dialog->show();
+}
+
+void MainWindow::studentCreated(QObject *dialog)
+{
+    StudentRepository *repo = (StudentRepository*) _repositories->value(QString("student"));
+
+    for (QList<Entity*>::const_iterator it = repo->entities().begin() ; it != repo->entities().end() ; it++)
+    {
+        Student *student = (Student*) *it;
+
+        _ui->Tableau_Eleve->addItem(student->name() + " " + student->surname());
+    }
+
+    dialog->deleteLater();
 }

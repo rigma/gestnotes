@@ -16,19 +16,19 @@ class MainWindow : public QMainWindow
 public:
     enum Mode
     {
-        Administrator = 0,
-        Professor = 1,
-        Student = 2
+        ADMINISTRATOR = 0,
+        PROFESSOR = 1,
+        STUDENT = 2
     };
 
 public:
-    explicit MainWindow(QMap<QString, Repository*> *repositories, const Mode &mode = Student, QWidget *parent = nullptr);
+    explicit MainWindow(QMap<QString, Repository*> *repositories, const Mode &mode = STUDENT, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
     void studentContextMenu(const QPoint &point);
     void ajouterEleve();
-    void studentCreated();
+    void studentCreated(QObject *dialog);
 
 private:
     Ui::MainWindow *_ui;

@@ -42,7 +42,7 @@ void ConnectionWindow::connect()
     result = repoAdmin->findBy(criteria);
     if (!result.empty())
     {
-        *_mainWindow = new MainWindow(_repositories, MainWindow::Administrator);
+        *_mainWindow = new MainWindow(_repositories, MainWindow::ADMINISTRATOR);
 
         close();
         (*_mainWindow)->show();
@@ -53,7 +53,7 @@ void ConnectionWindow::connect()
     result = repoProf->findBy(criteria);
     if (!result.empty())
     {
-        *_mainWindow = new MainWindow(_repositories, MainWindow::Professor);
+        *_mainWindow = new MainWindow(_repositories, MainWindow::PROFESSOR);
 
         close();
         (*_mainWindow)->show();

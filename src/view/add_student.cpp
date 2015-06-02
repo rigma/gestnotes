@@ -57,10 +57,6 @@ void AddStudentDialog::accept()
     student->setBirth(_ui->DateEdit_Naissance->date());
     repo->save(student);
     close();
-
-    emit studentCreated();
-
-    delete this;
 }
 
 void AddStudentDialog::reject()
