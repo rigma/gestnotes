@@ -10,7 +10,8 @@ Repository::Repository(Repository *repository, QMap<QString, Repository*> *paren
         _repositoryName = repository->_repositoryName;
 }
 
-Repository::Repository(const QString &repositoryName, QMap<QString, Repository*> *parent) : _parent(parent),
+Repository::Repository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent) : _parent(parent),
+    _db(db),
     _entities(),
     _repositoryName(repositoryName)
 {
@@ -18,6 +19,7 @@ Repository::Repository(const QString &repositoryName, QMap<QString, Repository*>
 }
 
 Repository::Repository(const Repository &repository) : _parent(repository._parent),
+    _db(repository._db),
     _entities(repository._entities),
     _repositoryName(repository._repositoryName)
 {

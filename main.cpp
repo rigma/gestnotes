@@ -2,7 +2,6 @@
 #include <QDebug>
 #include <QFile>
 #include <QMap>
-#include <QProgressBar>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 
@@ -23,7 +22,6 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     QMap<QString, Repository*> repositories;
     MainWindow *window(nullptr);
-    QProgressBar loading;
     QSqlDatabase db;
     QSqlQuery query;
 
@@ -47,7 +45,7 @@ int main(int argc, char **argv)
         query = QSqlQuery(db);
         query.exec(QString("CREATE TABLE administrator(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, serial TEXT NOT NULL, password INTEGER NOT NULL, name TEXT NOT NULL, surname TEXT NOT NULL, email TEXT NOT NULL)"));
         query.exec(QString("CREATE TABLE professor(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, serial TEXT NOT NULL, password INTEGER NOT NULL, name TEXT NOT NULL, surname TEXT NOT NULL)"));
-        query.exec(QString("CREATE TABLE student(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, serial TEXT NOT NULL, password INTEGER NOT NULL, name TEXT NOT NULL, surname TEXT NOT NULL, birth NUMERIC NOT NULL, registering NUMERIC NOT NULL)"));
+        query.exec(QString("CREATE TABLE student(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, serial TEXT NOT NULL, password INTEGER NOT NULL, name TEXT NOT NULL, surname TEXT NOT NULL, birth TEXT NOT NULL, registering TEXT NOT NULL)"));
         query.exec(QString("CREATE TABLE contact(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, lastName TEXT NOT NULL, first TEXT NOT NULL)"));
         query.exec(QString("CREATE TABLE coordinates(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, number INTEGER NOT NULL, type INTEGER NOT NULL, name TEXT NOT NULL, zipCode TEXT NOT NULL, city TEXT NOT NULL, country TEXT NOT NULL, email TEXT NOT NULL)"));
         query.exec(QString("CREATE TABLE phone(id INTEGER PRIMARY KEY ASC AUTOINCREMENT NOT NULL, type INTEGER NOT NULL, countryCode TEXT NOT NULL, number TEXT NOT NULL)"));
@@ -61,42 +59,23 @@ int main(int argc, char **argv)
         query.exec();
     }
 
-    loading.setMinimum(0);
-    loading.setMaximum(N);
-    loading.setWindowTitle(QString("Chargement..."));
-    loading.setValue(0);
-    loading.show();
-
-    repositories.insert("administrator", new AdministratorRepository(QString("administrator"), &repositories));
+    repositories.insert("administrator", new AdministratorRepository(QString("administrator"), &db, &repositories));
     repositories.value("administrator")->load();
 
-    loading.setValue(1);
-
-    repositories.insert("professor", new ProfessorRepository(QString("professor"), &repositories));
+    repositories.insert("professor", new ProfessorRepository(QString("professor"), &db, &repositories));
     repositories.value("professor")->load();
 
-    loading.setValue(2);
-
-    repositories.insert("student", new StudentRepository(QString("student"), &repositories));
+    repositories.insert("student", new StudentRepository(QString("student"), &db, &repositories));
     repositories.value("student")->load();
 
-    loading.setValue(3);
-
-    repositories.insert("contact", new ContactRepository(QString("contact"), &repositories));
+    repositories.insert("contact", new ContactRepository(QString("contact"), &db, &repositories));
     repositories.value("contact")->load();
 
-    loading.setValue(4);
-
-    repositories.insert("coordinates", new CoordinatesRepository(QString("coordinates"), &repositories));
+    repositories.insert("coordinates", new CoordinatesRepository(QString("coordinates"), &db, &repositories));
     repositories.value("coordinates")->load();
 
-    loading.setValue(5);
-
-    repositories.insert("phone", new PhoneRepository(QString("phone"), &repositories));
+    repositories.insert("phone", new PhoneRepository(QString("phone"), &db, &repositories));
     repositories.value("phone")->load();
-
-    loading.setValue(6);
-    loading.close();
 
     ConnectionWindow connection(&repositories, &window);
     connection.show();

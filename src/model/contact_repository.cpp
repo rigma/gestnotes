@@ -10,7 +10,7 @@ ContactRepository::ContactRepository(ContactRepository *repository, QMap<QString
 
 }
 
-ContactRepository::ContactRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
+ContactRepository::ContactRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -22,7 +22,9 @@ ContactRepository::ContactRepository(const ContactRepository &repository) : Repo
 
 bool ContactRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf("id"));
     int lastNameField(query.record().indexOf(QString("lastName")));
     int firstNameField(query.record().indexOf(QString("firstName")));
@@ -84,7 +86,7 @@ bool ContactRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Contact *contact = (Contact*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (contact->_modified)
         {

@@ -9,7 +9,7 @@ PhoneRepository::PhoneRepository(PhoneRepository *repository, QMap<QString, Repo
 
 }
 
-PhoneRepository::PhoneRepository(const QString &repositoryName, QMap<QString, Repository *> *parent) : Repository(repositoryName, parent)
+PhoneRepository::PhoneRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository *> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -21,7 +21,9 @@ PhoneRepository::PhoneRepository(const PhoneRepository &repository) : Repository
 
 bool PhoneRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int typeField(query.record().indexOf(QString("type")));
     int countryCodeField(query.record().indexOf(QString("countryCode")));
@@ -85,7 +87,7 @@ bool PhoneRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Phone *phone = (Phone*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (phone->_modified)
         {

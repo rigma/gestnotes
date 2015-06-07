@@ -7,7 +7,7 @@ class StudentRepository : public Repository
 {
 public:
     StudentRepository(StudentRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    StudentRepository(const QString &repositoryName, QMap<QString, Repository*> *parent = nullptr);
+    StudentRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent = nullptr);
     StudentRepository(const StudentRepository &repository);
 
 public:

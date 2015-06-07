@@ -9,7 +9,7 @@ ProfessorRepository::ProfessorRepository(ProfessorRepository *repository, QMap<Q
 
 }
 
-ProfessorRepository::ProfessorRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
+ProfessorRepository::ProfessorRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -21,7 +21,9 @@ ProfessorRepository::ProfessorRepository(const ProfessorRepository &repository) 
 
 bool ProfessorRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int serialField(query.record().indexOf(QString("serial")));
     int passwdField(query.record().indexOf(QString("password")));
@@ -97,7 +99,7 @@ bool ProfessorRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Professor *prof = (Professor*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (prof->_modified)
         {

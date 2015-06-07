@@ -9,7 +9,7 @@ AdministratorRepository::AdministratorRepository(AdministratorRepository *reposi
 
 }
 
-AdministratorRepository::AdministratorRepository(const QString &repositoryName, QMap<QString, Repository *> *parent) : Repository(repositoryName, parent)
+AdministratorRepository::AdministratorRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository *> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -21,7 +21,9 @@ AdministratorRepository::AdministratorRepository(const AdministratorRepository &
 
 bool AdministratorRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int serialField(query.record().indexOf(QString("serial")));
     int passwdField(query.record().indexOf(QString("password")));
@@ -104,7 +106,7 @@ bool AdministratorRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Administrator *admin = (Administrator*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (admin->_modified)
         {

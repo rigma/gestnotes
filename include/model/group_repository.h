@@ -7,7 +7,7 @@ class GroupRepository : public Repository
 {
 public:
     GroupRepository(GroupRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    GroupRepository(const QString &repositoryName, QMap<QString, Repository *> *parent = nullptr);
+    GroupRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository *> *parent = nullptr);
     GroupRepository(const GroupRepository &repository);
 
 public:

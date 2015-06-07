@@ -13,7 +13,7 @@ class Repository
 {
 public:
     Repository(Repository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    Repository(const QString &repositoryName, QMap<QString, Repository *> *parent = nullptr);
+    Repository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository *> *parent = nullptr);
     Repository(const Repository &repository);
     virtual ~Repository();
 
@@ -38,6 +38,7 @@ public:
 
 protected:
     QMap<QString, Repository*> *_parent;
+    QSqlDatabase *_db;
     QList<Entity*> _entities;
     QString _repositoryName;
 };

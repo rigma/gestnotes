@@ -7,7 +7,7 @@ class PhoneRepository : public Repository
 {
 public:
     PhoneRepository(PhoneRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    PhoneRepository(const QString &repositoryName, QMap<QString, Repository*> *parent = nullptr);
+    PhoneRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent = nullptr);
     PhoneRepository(const PhoneRepository &repository);
 
 public:

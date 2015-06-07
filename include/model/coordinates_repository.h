@@ -7,7 +7,7 @@ class CoordinatesRepository : public Repository
 {
 public:
     CoordinatesRepository(CoordinatesRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    CoordinatesRepository(const QString &repositoryName, QMap<QString, Repository *> *parent = nullptr);
+    CoordinatesRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository *> *parent = nullptr);
     CoordinatesRepository(const CoordinatesRepository &repository);
 
 public:

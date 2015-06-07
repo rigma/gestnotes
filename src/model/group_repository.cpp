@@ -9,7 +9,7 @@ GroupRepository::GroupRepository(GroupRepository *repository, QMap<QString, Repo
 
 }
 
-GroupRepository::GroupRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
+GroupRepository::GroupRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -21,7 +21,9 @@ GroupRepository::GroupRepository(const GroupRepository &repository) : Repository
 
 bool GroupRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int nameField(query.record().indexOf(QString("name")));
 
@@ -76,7 +78,7 @@ bool GroupRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Group *group = (Group*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (group->_modified)
         {

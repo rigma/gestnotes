@@ -9,7 +9,7 @@ CoordinatesRepository::CoordinatesRepository(CoordinatesRepository *repository, 
 
 }
 
-CoordinatesRepository::CoordinatesRepository(const QString &repositoryName, QMap<QString, Repository*> *parent) : Repository(repositoryName, parent)
+CoordinatesRepository::CoordinatesRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent) : Repository(repositoryName, db, parent)
 {
 
 }
@@ -21,7 +21,9 @@ CoordinatesRepository::CoordinatesRepository(const CoordinatesRepository &reposi
 
 bool CoordinatesRepository::load()
 {
-    QSqlQuery query(QString("SELECT * FROM ") + _repositoryName);
+    QSqlQuery query(*_db);
+
+    query.prepare(QString("SELECT * FROM ") + _repositoryName);
     int idField(query.record().indexOf(QString("id")));
     int numberField(query.record().indexOf(QString("number")));
     int typeField(query.record().indexOf(QString("type")));
@@ -92,7 +94,7 @@ bool CoordinatesRepository::persist()
     for (QList<Entity*>::const_iterator i = _entities.begin() ; i != _entities.end() ; i++)
     {
         Coordinates *coordinates = (Coordinates*) *i;
-        QSqlQuery query;
+        QSqlQuery query(*_db);
 
         if (coordinates->_modified)
         {

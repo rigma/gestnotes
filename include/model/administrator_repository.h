@@ -7,7 +7,7 @@ class AdministratorRepository : public Repository
 {
 public:
     AdministratorRepository(AdministratorRepository *repository = nullptr, QMap<QString, Repository*> *parent = nullptr);
-    AdministratorRepository(const QString &repositoryName, QMap<QString, Repository*> *parent = nullptr);
+    AdministratorRepository(const QString &repositoryName, QSqlDatabase *db, QMap<QString, Repository*> *parent = nullptr);
     AdministratorRepository(const AdministratorRepository &repository);
 
 public:
